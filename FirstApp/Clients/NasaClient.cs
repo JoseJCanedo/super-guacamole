@@ -11,8 +11,12 @@ public class NasaClient{
         _client = client;
     }
 
-    public async Task<NasaResponse> GetNasa(){
-        return await _client.GetFromJsonAsync<NasaResponse>("https://api.nasa.gov/planetary/apod?api_key=7lqr4qoVCaJweZv9hp89XHb6he3UEqesrowGwAMa");
+    public async Task<NasaResponse> GetNasa(string date){
+        var url = "https://api.nasa.gov/planetary/apod?api_key=7lqr4qoVCaJweZv9hp89XHb6he3UEqesrowGwAMa";
+        if(date != null){
+            url += "&date=" + date;
+        }
+        return await _client.GetFromJsonAsync<NasaResponse>(url);
     }
 
 }
